@@ -47,12 +47,11 @@ console.log(req.query.portL +":"+ getPort(req.query.portL) +":"+req.query.portR 
     var directionL = 1;
     var directionR = 1;
     if (req.query.direction == "left") {
-      directionL = 0.1
-      directionR = -0.1
+
+      directionR = -1
     }
     else if (req.query.direction == "right") {
-      directionR = 0.1
-      directionL = -0.1
+      directionL = -1
     }
     var motortime = 1000;
     if (req.query.time) {
