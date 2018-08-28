@@ -23,7 +23,7 @@ app.get('/motorTime', function(req, res) {
 
       motor.rampUpSp = 100;
       motor.rampDownSp = 100;
-      motor.runForTime(motorTime, motor.maxSpeed / 2, motor.stopActionValues.brake);
+      motor.runForTime(motortime, motor.maxSpeed / 2, motor.stopActionValues.brake);
 
       res.send('Completed')
     } else {
