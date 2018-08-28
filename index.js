@@ -40,6 +40,19 @@ console.log(req.query.portL +":"+ getPort(req.query.portL) +":"+req.query.portR 
   if (req.query.portL && getPort(req.query.portL) && req.query.portR && getPort(req.query.portR)) {
     var motorL = new ev3dev.Motor(getPort(req.query.portL));
     var motorR = new ev3dev.Motor(getPort(req.query.portR));
+    var speed  = 0.5;
+    if (req.query.speed) {
+      speed = 1/speed
+    }
+    var directionL = 1;
+    var directionR = 1;
+    if (req.query.direction == "left") {
+
+      directionR = -1
+    }
+    else if (req.query.direction == "right") {
+      directionL = -1
+    }
     var motortime = 1000;
     if (req.query.time) {
       motortime = parseInt(req.query.time)
@@ -51,8 +64,8 @@ console.log(req.query.portL +":"+ getPort(req.query.portL) +":"+req.query.portR 
 
       motorL.rampUpSp = 100;motorR.rampUpSp = 100;
       motorL.rampDownSp = 100;motorR.rampDownSp = 100;
-      motorL.runForTime(motortime, motorL.maxSpeed / 2, motorL.stopActionValues.brake);
-      motorR.runForTime(motortime, motorR.maxSpeed / 2, motorR.stopActionValues.brake);
+      motorL.runForTime(motortime, motorL.maxSpeed * speed * directionL, motorL.stopActionValues.brake);
+      motorR.runForTime(motortime, motorR.maxSpeed * speed * directionR, motorR.stopActionValues.brake);
 
       res.send('Completed')
     } else {
