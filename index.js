@@ -36,10 +36,10 @@ app.listen(3000, function() {
 
 var getPort = function(portID){
   switch(portID){
-    case A: return ev3dev.OUTPUT_A;
-    case B: return ev3dev.OUTPUT_B;
-    case C: return ev3dev.OUTPUT_C;
-    case D: return ev3dev.OUTPUT_D;
+    case "A": return ev3dev.OUTPUT_A;
+    case "B": return ev3dev.OUTPUT_B;
+    case "C": return ev3dev.OUTPUT_C;
+    case "D": return ev3dev.OUTPUT_D;
     default: return null;
   }
 }
