@@ -44,19 +44,15 @@ console.log(req.query.portL +":"+ getPort(req.query.portL) +":"+req.query.portR 
     if (req.query.time) {
       motortime = parseInt(req.query.time)
     }
-    if (motor.connected) {
+    if (motorL.connected && motorR.connected) {
 
-
-      console.log(' Port: ' + motor.address);
-      console.log(' Driver: ' + motor.driverName);
-      console.log(' Available commands: ' + motor.commands);
 
       console.log('Sending motor command...');
 
       motorL.rampUpSp = 100;motorR.rampUpSp = 100;
       motorL.rampDownSp = 100;motorR.rampDownSp = 100;
-      motorL.runForTime(motortime, motor.maxSpeed / 2, motor.stopActionValues.brake);
-      motorR.runForTime(motortime, motor.maxSpeed / 2, motor.stopActionValues.brake);
+      motorL.runForTime(motortime, motorL.maxSpeed / 2, motorL.stopActionValues.brake);
+      motorR.runForTime(motortime, motorR.maxSpeed / 2, motorR.stopActionValues.brake);
 
       res.send('Completed')
     } else {
