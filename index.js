@@ -53,8 +53,8 @@ console.log(req.query.portL +":"+ getPort(req.query.portL) +":"+req.query.portR 
 
       console.log('Sending motor command...');
 
-      motor.rampUpSp = 100;
-      motor.rampDownSp = 100;
+      motorL.rampUpSp = 100;motorR.rampUpSp = 100;
+      motorL.rampDownSp = 100;motorR.rampDownSp = 100;
       motorL.runForTime(motortime, motor.maxSpeed / 2, motor.stopActionValues.brake);
       motorR.runForTime(motortime, motor.maxSpeed / 2, motor.stopActionValues.brake);
 
