@@ -1,3 +1,13 @@
+/**
+ * @Author: John Isaacs <john>
+ * @Date:   30-Aug-182018
+ * @Filename: index.js
+ * @Last modified by:   john
+ * @Last modified time: 30-Aug-182018
+ */
+
+
+
 const express = require('express')
 const app = express()
 const ev3dev = require('ev3dev-lang');
@@ -42,7 +52,7 @@ console.log(req.query.portL +":"+ getPort(req.query.portL) +":"+req.query.portR 
     var motorR = new ev3dev.Motor(getPort(req.query.portR));
     var speed  = 0.5;
     if (req.query.speed) {
-      speed = 1/speed
+      speed = 1/parseInt(speed)
     }
     var directionL = 1;
     var directionR = 1;

@@ -1,16 +1,26 @@
+/**
+ * @Author: John Isaacs <john>
+ * @Date:   30-Aug-182018
+ * @Filename: dancetest.js
+ * @Last modified by:   john
+ * @Last modified time: 30-Aug-182018
+ */
+
+
+
 const request = require('request');
 
 
 
 //ipaddresses of each robot.
-var robots = [];
+var robots = ["192.168.2.5"];
 //will end up being a multidimensional array robot,currentcommand, commands[]
 var commandset = []
 
-var simple_dance =[]
-simpledance.push("/drive?time=3000&speed=-2");
-simpledance.push("/drive?time=2500&speed=2");
-simpledance.push("/drive?time=500&direction=left");
+var simpledance =[]
+simpledance.push("/drive?portL=C&portR=D&time=3000&speed=-2");
+simpledance.push("/drive?portL=C&portR=D&time=2500&speed=2");
+simpledance.push("/drive?portL=C&portR=D&time=500&direction=left");
 
 commandset.push({robot:0,currentcommand:0,commands:simpledance});
 commandset.push({robot:1,currentcommand:0,commands:simpledance});
@@ -19,7 +29,9 @@ commandset.forEach(function(c) {
 });
 
 function sendCommand(command) {
-  request('https://'+robots[command.robot]+command.commands[command.currentcommand],
+  var commandstring = 'http://'+robots[command.robot]+":3000"+command.commands[command.currentcommand];
+  console.log(commandstring)
+  request(command,{},
   (err, res, body) => {
     if (err) {
       return console.log(err);
