@@ -11,7 +11,9 @@
 const express = require('express')
 const app = express()
 const ev3dev = require('ev3dev-lang');
-
+const Queue = require('./commandQueue.js');
+// Create an array and append your functions to them
+var funqueue = new Queue.Queue(false);
 
 //?time=value_in_milliseconds&port=outputPort
 app.get('/motorTime', function(req, res) {
@@ -47,26 +49,19 @@ app.get('/motorTime', function(req, res) {
 
 app.get('/drive', function(req, res) {
 console.log(req.query.portL +":"+ getPort(req.query.portL) +":"+req.query.portR +":"+ getPort(req.query.portR))
+
   if (req.query.portL && getPort(req.query.portL) && req.query.portR && getPort(req.query.portR)) {
     var motorL = new ev3dev.Motor(getPort(req.query.portL));
     var motorR = new ev3dev.Motor(getPort(req.query.portR));
     var speed  = 0.5;
+    var distance = 1;
     if (req.query.speed) {
       speed = 1/parseInt(speed)
     }
-    var directionL = 1;
-    var directionR = 1;
-    if (req.query.direction == "left") {
+    if (req.query.distance) {
+      speed = parseInt(res.query.distance);
+    }
 
-      directionR = -1
-    }
-    else if (req.query.direction == "right") {
-      directionL = -1
-    }
-    var motortime = 1000;
-    if (req.query.time) {
-      motortime = parseInt(req.query.time)
-    }
     if (motorL.connected && motorR.connected) {
 
 
@@ -74,9 +69,12 @@ console.log(req.query.portL +":"+ getPort(req.query.portL) +":"+req.query.portR 
 
       motorL.rampUpSp = 100;motorR.rampUpSp = 100;
       motorL.rampDownSp = 100;motorR.rampDownSp = 100;
-      motorL.runForTime(motortime, motorL.maxSpeed * speed * directionL, motorL.stopActionValues.brake);
-      motorR.runForTime(motortime, motorR.maxSpeed * speed * directionR, motorR.stopActionValues.brake);
-
+      funqueue.add( 
+        function(){
+          motorL.runForDistance(distance, motorL.maxSpeed * speed * directionL, motorL.stopActionValues.brake);
+          motorR.runForDistance(distance, motorR.maxSpeed * speed * directionR, motorR.stopActionValues.brake);
+        }
+      );
       res.send('Completed')
     } else {
       console.log("No motor could be found. Are you sure that one is connected?");
@@ -115,4 +113,21 @@ var getStop = function(stopCommand) {
     case "hold":
       return motor.stopActionValues.hold;
   }
+}
+
+
+
+// Function wrapping code.
+// fn - reference to function.
+// context - what you want "this" to be.
+// params - array of parameters to pass to function.
+var wrapFunction = function(fn, context, params) {
+    return function() {
+        fn.apply(context, params);
+    };
+}
+
+// Remove and execute all items in the array
+while (funqueue.length > 0) {
+    (funqueue.shift())();
 }
