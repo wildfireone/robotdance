@@ -59,7 +59,7 @@ console.log(req.query.portL +":"+ getPort(req.query.portL) +":"+req.query.portR 
       speed = 1/parseInt(speed)
     }
     if (req.query.distance) {
-      speed = parseInt(res.query.distance);
+        distance= parseInt(res.query.distance);
     }
 
     if (motorL.connected && motorR.connected) {
@@ -69,7 +69,7 @@ console.log(req.query.portL +":"+ getPort(req.query.portL) +":"+req.query.portR 
 
       motorL.rampUpSp = 100;motorR.rampUpSp = 100;
       motorL.rampDownSp = 100;motorR.rampDownSp = 100;
-      funqueue.add( 
+      funqueue.add(
         function(){
           motorL.runForDistance(distance, motorL.maxSpeed * speed * directionL, motorL.stopActionValues.brake);
           motorR.runForDistance(distance, motorR.maxSpeed * speed * directionR, motorR.stopActionValues.brake);

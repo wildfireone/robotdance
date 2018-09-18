@@ -3,12 +3,13 @@
 
 
 // Constructor
-function Motor(address,port, type) {
+function Motor(sender,address,port, type) {
   // always initialize all instance properties
   this.address = address;
   this.type = type;
   this.port = port; // default value
   this.currentSpeed = 2;
+    this.sender =sender
 
 }
 // class methods
