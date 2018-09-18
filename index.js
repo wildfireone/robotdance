@@ -48,7 +48,7 @@ app.get('/motorTime', function(req, res) {
 });
 
 app.get('/drive', function(req, res) {
-console.log("speed:"+req.query.distance+ ":" +req.query.portL +":"+ getPort(req.query.portL) +":"+req.query.portR +":"+ getPort(req.query.portR))
+console.log(req)
 
   if (req.query.portL && getPort(req.query.portL) && req.query.portR && getPort(req.query.portR)) {
     var motorL = new ev3dev.Motor(getPort(req.query.portL));
