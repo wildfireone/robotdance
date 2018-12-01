@@ -160,7 +160,8 @@ if(requrl == '/driveon'){
           motorL.rampDownSp = 100;motorR.rampDownSp = 100;
           //funqueue.add(
             //function(){
-            //console.log(directionL +":"+directionR)
+            //console.log(directionL +":"+directionR)\
+            console.log(motorR.maxSpeed);
               motorL.runForever(1*directionL , motorL.stopActionValues.hold);
               motorR.runForever(1*directionR , motorR.stopActionValues.hold);
             //}
