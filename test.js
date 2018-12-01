@@ -29,9 +29,9 @@ stdin.on( 'data', function( key ){
   }
 
   switch(key){
-    case 'w': console.log("up"); Robots.forEach(function(r){r.move(100,1)}); break;
+    case 'w': console.log("up"); Robots.forEach(function(r){r.moveon(1)}); break;
     case 'a': console.log("left"); Robots.forEach(function(r){r.turn(100,"L")}); break;
-    case 's': console.log("down"); Robots.forEach(function(r){r.move(100,-1)}); break;
+    case 's': console.log("down"); Robots.forEach(function(r){r.moveon(-1)}); break;
     case 'd': console.log("right"); Robots.forEach(function(r){r.turn(100,"R")}); break;
 
   }

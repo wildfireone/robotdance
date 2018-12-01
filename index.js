@@ -118,6 +118,55 @@ app.get('/drive', function(req, res) {
   }
 });
 
+app.get('/driveon', function(req, res) {
+
+
+  if (req.query.portL && getPort(req.query.portL) && req.query.portR && getPort(req.query.portR)) {
+    var motorL = new ev3dev.Motor(getPort(req.query.portL));
+    var motorR = new ev3dev.Motor(getPort(req.query.portR));
+    var speed  = 0.5;
+    var distance = 1;
+    var directionL =1;
+    var directionR =1;
+    var motortime = 1000;
+
+    if (req.query.direction){
+      directionL = directionL * req.query.direction;
+      directionR = directionR * req.query.direction;
+    }
+
+    //console.log(req.query)
+    if (req.query.speed) {
+      speed = 1/parseInt(speed)
+    }
+
+        if (motorL.connected && motorR.connected) {
+
+
+          //console.log('Sending motor command...');
+
+          motorL.rampUpSp = 100;motorR.rampUpSp = 100;
+          motorL.rampDownSp = 100;motorR.rampDownSp = 100;
+          //funqueue.add(
+            //function(){
+            //console.log(directionL +":"+directionR)
+              motorL.runForever(motorL.maxSpeed *directionL , motorL.stopActionValues.hold);
+              motorR.runForever(motorR.maxSpeed *directionR , motorR.stopActionValues.hold);
+            //}
+          //);
+          res.send('Completed')
+        } else {
+          console.log("No motor could be found. Are you sure that one is connected?");
+          res.send('no motor on that port')
+        }
+
+
+
+  } else {
+    res.send('no port supplied')
+  }
+});
+
 app.get('/driveRotate', function(req, res) {
 
 

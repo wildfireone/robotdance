@@ -37,6 +37,20 @@ var commandString  = "/drive?"
                 }
   this.sender(command);
 };
+
+Steering.prototype.moveon = function(direction) {
+
+var commandString  = "/drive?"
+                    +"portL="+this.leftPort
+                    +"&portR="+this.rightPort
+                    +"&speed="+this.currentSpeed
+                    +"&direction="+direction
+
+  var command = {ip:this.address,
+                command:commandString
+                }
+  this.sender(command);
+};
 Steering.prototype.moveFor = function(time) {
   var commandString  = "/driveTime?"
                       +"portL="+this.leftPort
