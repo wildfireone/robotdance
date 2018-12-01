@@ -162,8 +162,8 @@ if(requrl == '/driveon'){
             //function(){
             //console.log(directionL +":"+directionR)\
             console.log(motorR.maxSpeed);
-              motorL.runForever(100*directionL , motorL.stopActionValues.hold);
-              motorR.runForever(100*directionR , motorR.stopActionValues.hold);
+              motorL.runForever(500*directionL , motorL.stopActionValues.hold);
+              motorR.runForever(500*directionR , motorR.stopActionValues.hold);
             //}
           //);
           res.end('Completed')
@@ -229,8 +229,8 @@ if(requrl == '/driveRotate'){
           motorL.rampDownSp = 100;motorR.rampDownSp = 100;
           //funqueue.add(
             //function(){
-              motorL.runForever((1 *0.2)* directionL , motorL.stopActionValues.break);
-              motorR.runForever((1 *0.2)* directionR , motorR.stopActionValues.break);
+              motorL.runForever((500 *0.2)* directionL , motorL.stopActionValues.break);
+              motorR.runForever((500 *0.2)* directionR , motorR.stopActionValues.break);
             //}
           //);
           res.end('Completed')
