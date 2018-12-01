@@ -17,7 +17,7 @@ var funqueue = new Queue.Queue(false);
 
 
 http.createServer(function (req, res) {
-    console.log('Example app listening on port 3000!')
+
 
     var requrl = req.url;
 
@@ -264,7 +264,8 @@ if(requrl == '/driveRotate'){
 
 
 
-}).listen(8080);
+}).listen(3000);
+console.log('Example app listening on port 3000!')
 
 var getPort = function(portID) {
   switch (portID) {
