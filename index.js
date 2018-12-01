@@ -48,10 +48,10 @@ if(requrl == '/motorTime'){
       motor.rampDownSp = 100;
       motor.runForTime(motortime, motor.maxSpeed / 2, motor.stopActionValues.brake);
 
-      res.send('Completed')
+      res.end('Completed')
     } else {
       console.log("No motor could be found. Are you sure that one is connected?");
-      res.send('no motor on that port')
+      res.end('no motor on that port')
     }
   } else {
     res.send('no port supplied')
@@ -95,10 +95,10 @@ if(requrl == '/drive'){
               motorR.runForDistance(distance * directionR, motorR.maxSpeed , motorR.stopActionValues.hold);
             //}
           //);
-          res.send('Completed')
+          res.end('Completed')
         } else {
           console.log("No motor could be found. Are you sure that one is connected?");
-          res.send('no motor on that port')
+          res.end('no motor on that port')
         }
     }
     if (req.query.time) {
@@ -116,16 +116,16 @@ if(requrl == '/drive'){
               motorR.runForTime(motortime, motorR.maxSpeed , motorR.stopActionValues.coast);
             //}
           //);
-          res.send('Completed')
+          res.end('Completed')
         } else {
           console.log("No motor could be found. Are you sure that one is connected?");
-          res.send('no motor on that port')
+          res.end('no motor on that port')
         }
     }
 
 
   } else {
-    res.send('no port supplied')
+    res.end('no port supplied')
   }
 }
 
@@ -165,16 +165,16 @@ if(requrl == '/driveon'){
               motorR.runForever(motorR.maxSpeed *directionR , motorR.stopActionValues.hold);
             //}
           //);
-          res.send('Completed')
+          res.end('Completed')
         } else {
           console.log("No motor could be found. Are you sure that one is connected?");
-          res.send('no motor on that port')
+          res.end('no motor on that port')
         }
 
 
 
   } else {
-    res.send('no port supplied')
+    res.end('no port supplied')
   }
 }
 
@@ -232,10 +232,10 @@ if(requrl == '/driveRotate'){
               motorR.runForever((motorR.maxSpeed *0.2)* directionR , motorR.stopActionValues.break);
             //}
           //);
-          res.send('Completed')
+          res.end('Completed')
         } else {
           console.log("No motor could be found. Are you sure that one is connected?");
-          res.send('no motor on that port')
+          res.end('no motor on that port')
         }
     }
     if (query.time) {
@@ -253,16 +253,16 @@ if(requrl == '/driveRotate'){
               motorR.runForTime(motortime, motorR.maxSpeed , motorR.stopActionValues.brake);
             //}
           //);
-          res.send('Completed')
+          res.end('Completed')
         } else {
           console.log("No motor could be found. Are you sure that one is connected?");
-          res.send('no motor on that port')
+          res.end('no motor on that port')
         }
     }
 
 
   } else {
-    res.send('no port supplied')
+    res.end('no port supplied')
   }
 };
 
