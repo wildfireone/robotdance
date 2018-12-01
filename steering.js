@@ -50,7 +50,7 @@ Steering.prototype.moveFor = function(time) {
     this.sender(command);
 
 };
-Steering.prototype.rotate = function(direction) {
+Steering.prototype.rotate = function(distance,direction) {
   var commandString  = "/driveRotate?"
                       +"portL="+this.leftPort
                       +"&portR="+this.rightPort

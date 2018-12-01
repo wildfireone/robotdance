@@ -20,8 +20,11 @@ function Robot(address) {
 
 }
 // class methods
-Robot.prototype.move = function(distance) {
-  this.Steering.move(distance);
+Robot.prototype.move = function(distance,direction) {
+  this.Steering.move(distance,direction);
+};
+Robot.prototype.turn = function(distance,direction) {
+  this.Steering.rotate(distance,direction);
 };
 Robot.prototype.moveFor = function(time) {
   LeftMotor.moveFor(time);
