@@ -20,17 +20,19 @@ http.createServer(function (req, res) {
 
 
     var requrl = req.url.split('?')[0];
+    var url_parts = url.parse(req.url, true);
+    var query = url_parts.query;
     console.log(requrl);
 
 
 //?time=value_in_milliseconds&port=outputPort
 if(requrl == '/motorTime'){
 
-  if (req.query.port || getPort(req.query.port)) {
-    var motor = new ev3dev.Motor(getPort(req.query.port));
+  if (query.port || getPort(query.port)) {
+    var motor = new ev3dev.Motor(getPort(query.port));
     var motortime = 1000;
-    if (req.query.time) {
-      motortime = parseInt(req.query.time)
+    if (query.time) {
+      motortime = parseInt(query.time)
     }
     if (motor.connected) {
 
@@ -58,26 +60,26 @@ if(requrl == '/motorTime'){
 if(requrl == '/drive'){
 
 
-  if (req.query.portL && getPort(req.query.portL) && req.query.portR && getPort(req.query.portR)) {
-    var motorL = new ev3dev.Motor(getPort(req.query.portL));
-    var motorR = new ev3dev.Motor(getPort(req.query.portR));
+  if (query.portL && getPort(query.portL) && query.portR && getPort(query.portR)) {
+    var motorL = new ev3dev.Motor(getPort(query.portL));
+    var motorR = new ev3dev.Motor(getPort(query.portR));
     var speed  = 0.5;
     var distance = 1;
     var directionL =1;
     var directionR =1;
     var motortime = 1000;
 
-    if (req.query.direction){
-      directionL = directionL * req.query.direction;
-      directionR = directionR * req.query.direction;
+    if (query.direction){
+      directionL = directionL * query.direction;
+      directionR = directionR * query.direction;
     }
 
     //console.log(req.query)
-    if (req.query.speed) {
+    if (query.speed) {
       speed = 1/parseInt(speed)
     }
-    if (req.query.distance) {
-        distance= parseInt(req.query.distance);
+    if (query.distance) {
+        distance= parseInt(query.distance);
         if (motorL.connected && motorR.connected) {
 
 
@@ -99,7 +101,7 @@ if(requrl == '/drive'){
         }
     }
     if (req.query.time) {
-        motortime = parseInt(req.query.time)
+        motortime = parseInt(query.time)
         if (motorL.connected && motorR.connected) {
 
 
@@ -129,9 +131,9 @@ if(requrl == '/drive'){
 if(requrl == '/driveon'){
 
 
-  if (req.query.portL && getPort(req.query.portL) && req.query.portR && getPort(req.query.portR)) {
-    var motorL = new ev3dev.Motor(getPort(req.query.portL));
-    var motorR = new ev3dev.Motor(getPort(req.query.portR));
+  if (query.portL && getPort(query.portL) && query.portR && getPort(query.portR)) {
+    var motorL = new ev3dev.Motor(getPort(query.portL));
+    var motorR = new ev3dev.Motor(getPort(query.portR));
     var speed  = 0.5;
     var distance = 1;
     var directionL =1;
@@ -139,8 +141,8 @@ if(requrl == '/driveon'){
     var motortime = 1000;
 
     if (req.query.direction){
-      directionL = directionL * req.query.direction;
-      directionR = directionR * req.query.direction;
+      directionL = directionL * query.direction;
+      directionR = directionR * query.direction;
     }
 
     //console.log(req.query)
@@ -177,9 +179,9 @@ if(requrl == '/driveon'){
 
 if(requrl == '/stop'){
 
-  if (req.query.portL && getPort(req.query.portL) && req.query.portR && getPort(req.query.portR)) {
-    var motorL = new ev3dev.Motor(getPort(req.query.portL));
-    var motorR = new ev3dev.Motor(getPort(req.query.portR));
+  if (query.portL && getPort(query.portL) && query.portR && getPort(query.portR)) {
+    var motorL = new ev3dev.Motor(getPort(query.portL));
+    var motorR = new ev3dev.Motor(getPort(query.portR));
     motorL.runForDistance(1,motorL.maxSpeed, motorL.stopActionValues.break);
     motorR.runForDistance(1,motorR.maxSpeed, motorR.stopActionValues.break);
   }
@@ -189,20 +191,20 @@ if(requrl == '/stop'){
 if(requrl == '/driveRotate'){
 
 
-  if (req.query.portL && getPort(req.query.portL) && req.query.portR && getPort(req.query.portR)) {
-    var motorL = new ev3dev.Motor(getPort(req.query.portL));
-    var motorR = new ev3dev.Motor(getPort(req.query.portR));
+  if (req.query.portL && getPort(query.portL) && query.portR && getPort(query.portR)) {
+    var motorL = new ev3dev.Motor(getPort(query.portL));
+    var motorR = new ev3dev.Motor(getPort(query.portR));
     var speed  = 0.5;
     var distance = 1;
     var directionL =1;
     var directionR =1;
     //console.log(req.query)
 
-    if(req.query.direction =="R"){
+    if(query.direction =="R"){
       directionR =1;
       directionL =-1;
     }
-    else if(req.query.direction =="L"){
+    else if(query.direction =="L"){
       directionR =-1;
       directionL =1;
     }
@@ -211,11 +213,11 @@ if(requrl == '/driveRotate'){
     var motortime = 1000;
 
 
-    if (req.query.speed) {
+    if (query.speed) {
       speed = 1/parseInt(speed)
     }
-    if (req.query.distance) {
-        distance= parseInt(req.query.distance);
+    if (query.distance) {
+        distance= parseInt(query.distance);
         if (motorL.connected && motorR.connected) {
 
 
@@ -236,7 +238,7 @@ if(requrl == '/driveRotate'){
         }
     }
     if (req.query.time) {
-        motortime = parseInt(req.query.time)
+        motortime = parseInt(query.time)
         if (motorL.connected && motorR.connected) {
 
 
