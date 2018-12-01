@@ -19,7 +19,7 @@ var funqueue = new Queue.Queue(false);
 http.createServer(function (req, res) {
 
 
-    var requrl = req.url;
+    var requrl = req.url.split('?')[0];
     console.log(requrl);
 
 
