@@ -55,6 +55,8 @@ app.get('/drive', function(req, res) {
     var motorR = new ev3dev.Motor(getPort(req.query.portR));
     var speed  = 0.5;
     var distance = 1;
+    var directionL =1;
+    var directionR =1;
 
     console.log(req.query)
     if (req.query.speed) {
