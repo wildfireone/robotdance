@@ -20,6 +20,7 @@ http.createServer(function (req, res) {
 
 
     var requrl = req.url;
+    console.log(requrl);
 
 
 //?time=value_in_milliseconds&port=outputPort
