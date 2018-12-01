@@ -33,6 +33,7 @@ stdin.on( 'data', function( key ){
     case 'a': console.log("left"); Robots.forEach(function(r){r.turn(100,"L")}); break;
     case 's': console.log("down"); Robots.forEach(function(r){r.moveon(-1)}); break;
     case 'd': console.log("right"); Robots.forEach(function(r){r.turn(100,"R")}); break;
+    case 'x': console.log("stop"); Robots.forEach(function(r){r.stop()}); break;
 
   }
 });

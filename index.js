@@ -172,8 +172,8 @@ app.get('/stop',function(req,res){
   if (req.query.portL && getPort(req.query.portL) && req.query.portR && getPort(req.query.portR)) {
     var motorL = new ev3dev.Motor(getPort(req.query.portL));
     var motorR = new ev3dev.Motor(getPort(req.query.portR));
-    motorR.stop();
-    motorL.stop();
+    motorL.runForDistance(1,motorL.maxSpeed, motorL.stopActionValues.break);
+    motorR.runForDistance(1,motorR.maxSpeed, motorR.stopActionValues.break);
   }
 
 });
