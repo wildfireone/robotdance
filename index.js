@@ -162,8 +162,8 @@ if(requrl == '/driveon'){
             //function(){
             //console.log(directionL +":"+directionR)\
             console.log(motorR.maxSpeed);
-              motorL.runForever(1*directionL , motorL.stopActionValues.hold);
-              motorR.runForever(1*directionR , motorR.stopActionValues.hold);
+              motorL.runForever(100*directionL , motorL.stopActionValues.hold);
+              motorR.runForever(100*directionR , motorR.stopActionValues.hold);
             //}
           //);
           res.end('Completed')
