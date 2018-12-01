@@ -141,13 +141,13 @@ if(requrl == '/driveon'){
     var directionR =1;
     var motortime = 1000;
 
-    if (req.query.direction){
+    if (query.direction){
       directionL = directionL * query.direction;
       directionR = directionR * query.direction;
     }
 
     //console.log(req.query)
-    if (req.query.speed) {
+    if (query.speed) {
       speed = 1/parseInt(speed)
     }
 
@@ -192,7 +192,7 @@ if(requrl == '/stop'){
 if(requrl == '/driveRotate'){
 
 
-  if (req.query.portL && getPort(query.portL) && query.portR && getPort(query.portR)) {
+  if (query.portL && getPort(query.portL) && query.portR && getPort(query.portR)) {
     var motorL = new ev3dev.Motor(getPort(query.portL));
     var motorR = new ev3dev.Motor(getPort(query.portR));
     var speed  = 0.5;
@@ -238,7 +238,7 @@ if(requrl == '/driveRotate'){
           res.send('no motor on that port')
         }
     }
-    if (req.query.time) {
+    if (query.time) {
         motortime = parseInt(query.time)
         if (motorL.connected && motorR.connected) {
 
