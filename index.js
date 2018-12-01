@@ -80,8 +80,8 @@ app.get('/drive', function(req, res) {
           //funqueue.add(
             //function(){
             console.log(directionL +":"+directionR)
-              motorL.runForDistance(distance * directionL, motorL.maxSpeed , motorL.stopActionValues.brake);
-              motorR.runForDistance(distance * directionR, motorR.maxSpeed , motorR.stopActionValues.brake);
+              motorL.runForDistance(distance * directionL, motorL.maxSpeed , motorL.stopActionValues.coast);
+              motorR.runForDistance(distance * directionR, motorR.maxSpeed , motorR.stopActionValues.coast);
             //}
           //);
           res.send('Completed')
@@ -101,8 +101,8 @@ app.get('/drive', function(req, res) {
           motorL.rampDownSp = 100;motorR.rampDownSp = 100;
           //funqueue.add(
             //function(){
-              motorL.runForTime(motortime, motorL.maxSpeed , motorL.stopActionValues.brake);
-              motorR.runForTime(motortime, motorR.maxSpeed , motorR.stopActionValues.brake);
+              motorL.runForTime(motortime, motorL.maxSpeed , motorL.stopActionValues.coast);
+              motorR.runForTime(motortime, motorR.maxSpeed , motorR.stopActionValues.coast);
             //}
           //);
           res.send('Completed')
@@ -156,8 +156,8 @@ app.get('/driveRotate', function(req, res) {
           motorL.rampDownSp = 100;motorR.rampDownSp = 100;
           //funqueue.add(
             //function(){
-              motorL.runForDistance(distance, motorL.maxSpeed * directionL, motorL.stopActionValues.brake);
-              motorR.runForDistance(distance, motorR.maxSpeed * directionR, motorR.stopActionValues.brake);
+              motorL.runForDistance(distance * directionL, motorL.maxSpeed , motorL.stopActionValues.coast);
+              motorR.runForDistance(distance * directionR, motorR.maxSpeed , motorR.stopActionValues.coast);
             //}
           //);
           res.send('Completed')
