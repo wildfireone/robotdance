@@ -217,8 +217,8 @@ app.get('/driveRotate', function(req, res) {
           motorL.rampDownSp = 100;motorR.rampDownSp = 100;
           //funqueue.add(
             //function(){
-              motorL.runForever(motorL.maxSpeed * directionL , motorL.stopActionValues.break);
-              motorR.runForever(motorR.maxSpeed * directionR , motorR.stopActionValues.break);
+              motorL.runForever((motorL.maxSpeed *0.2)* directionL , motorL.stopActionValues.break);
+              motorR.runForever((motorR.maxSpeed *0.2)* directionR , motorR.stopActionValues.break);
             //}
           //);
           res.send('Completed')
