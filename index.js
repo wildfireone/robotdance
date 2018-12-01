@@ -71,12 +71,12 @@ app.get('/drive', function(req, res) {
 
       motorL.rampUpSp = 100;motorR.rampUpSp = 100;
       motorL.rampDownSp = 100;motorR.rampDownSp = 100;
-      funqueue.add(
-        function(){
+      //funqueue.add(
+        //function(){
           motorL.runForDistance(distance, motorL.maxSpeed * speed * directionL, motorL.stopActionValues.brake);
           motorR.runForDistance(distance, motorR.maxSpeed * speed * directionR, motorR.stopActionValues.brake);
-        }
-      );
+        //}
+      //);
       res.send('Completed')
     } else {
       console.log("No motor could be found. Are you sure that one is connected?");
