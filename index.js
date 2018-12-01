@@ -91,8 +91,8 @@ if(requrl == '/drive'){
           //funqueue.add(
             //function(){
             //console.log(directionL +":"+directionR)
-              motorL.runForDistance(distance * directionL, motorL.maxSpeed , motorL.stopActionValues.hold);
-              motorR.runForDistance(distance * directionR, motorR.maxSpeed , motorR.stopActionValues.hold);
+              motorL.runForDistance(distance * directionL, 500 , motorL.stopActionValues.hold);
+              motorR.runForDistance(distance * directionR, 500, motorR.stopActionValues.hold);
             //}
           //);
           res.end('Completed')
