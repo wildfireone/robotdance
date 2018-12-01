@@ -161,8 +161,8 @@ if(requrl == '/driveon'){
           //funqueue.add(
             //function(){
             //console.log(directionL +":"+directionR)
-              motorL.runForever(motorL.maxSpeed *directionL , motorL.stopActionValues.hold);
-              motorR.runForever(motorR.maxSpeed *directionR , motorR.stopActionValues.hold);
+              motorL.runForever(1*directionL , motorL.stopActionValues.hold);
+              motorR.runForever(1*directionR , motorR.stopActionValues.hold);
             //}
           //);
           res.end('Completed')
@@ -228,8 +228,8 @@ if(requrl == '/driveRotate'){
           motorL.rampDownSp = 100;motorR.rampDownSp = 100;
           //funqueue.add(
             //function(){
-              motorL.runForever((motorL.maxSpeed *0.2)* directionL , motorL.stopActionValues.break);
-              motorR.runForever((motorR.maxSpeed *0.2)* directionR , motorR.stopActionValues.break);
+              motorL.runForever((1 *0.2)* directionL , motorL.stopActionValues.break);
+              motorR.runForever((1 *0.2)* directionR , motorR.stopActionValues.break);
             //}
           //);
           res.end('Completed')
@@ -249,8 +249,8 @@ if(requrl == '/driveRotate'){
           motorL.rampDownSp = 100;motorR.rampDownSp = 100;
           //funqueue.add(
             //function(){
-              motorL.runForTime(motortime, motorL.maxSpeed , motorL.stopActionValues.brake);
-              motorR.runForTime(motortime, motorR.maxSpeed , motorR.stopActionValues.brake);
+              motorL.runForTime(motortime, 2, motorL.stopActionValues.brake);
+              motorR.runForTime(motortime, 2 , motorR.stopActionValues.brake);
             //}
           //);
           res.end('Completed')
