@@ -7,16 +7,23 @@
  */
 
 
+ var http = require('http');
 
-const express = require('express')
-const app = express()
+
 const ev3dev = require('ev3dev-lang');
 const Queue = require('./commandQueue.js');
 // Create an array and append your functions to them
 var funqueue = new Queue.Queue(false);
 
+
+http.createServer(function (req, res) {
+    console.log('Example app listening on port 3000!')
+
+    var requrl = req.url;
+
+
 //?time=value_in_milliseconds&port=outputPort
-app.get('/motorTime', function(req, res) {
+if(requrl == '/motorTime'){
 
   if (req.query.port || getPort(req.query.port)) {
     var motor = new ev3dev.Motor(getPort(req.query.port));
@@ -45,9 +52,9 @@ app.get('/motorTime', function(req, res) {
   } else {
     res.send('no port supplied')
   }
-});
+}
 
-app.get('/drive', function(req, res) {
+if(requrl == '/drive'){
 
 
   if (req.query.portL && getPort(req.query.portL) && req.query.portR && getPort(req.query.portR)) {
@@ -116,9 +123,9 @@ app.get('/drive', function(req, res) {
   } else {
     res.send('no port supplied')
   }
-});
+}
 
-app.get('/driveon', function(req, res) {
+if(requrl == '/driveon'){
 
 
   if (req.query.portL && getPort(req.query.portL) && req.query.portR && getPort(req.query.portR)) {
@@ -165,9 +172,9 @@ app.get('/driveon', function(req, res) {
   } else {
     res.send('no port supplied')
   }
-});
+}
 
-app.get('/stop',function(req,res){
+if(requrl == '/stop'){
 
   if (req.query.portL && getPort(req.query.portL) && req.query.portR && getPort(req.query.portR)) {
     var motorL = new ev3dev.Motor(getPort(req.query.portL));
@@ -176,9 +183,9 @@ app.get('/stop',function(req,res){
     motorR.runForDistance(1,motorR.maxSpeed, motorR.stopActionValues.break);
   }
 
-});
+}
 
-app.get('/driveRotate', function(req, res) {
+if(requrl == '/driveRotate'){
 
 
   if (req.query.portL && getPort(req.query.portL) && req.query.portR && getPort(req.query.portR)) {
@@ -253,11 +260,11 @@ app.get('/driveRotate', function(req, res) {
   } else {
     res.send('no port supplied')
   }
-});
+};
 
-app.listen(3000, function() {
-  console.log('Example app listening on port 3000!')
-})
+
+
+}).listen(8080);
 
 var getPort = function(portID) {
   switch (portID) {
