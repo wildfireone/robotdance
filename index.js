@@ -65,29 +65,48 @@ app.get('/drive', function(req, res) {
     }
     if (req.query.distance) {
         distance= parseInt(req.query.distance);
+        if (motorL.connected && motorR.connected) {
+
+
+          console.log('Sending motor command...');
+
+          motorL.rampUpSp = 100;motorR.rampUpSp = 100;
+          motorL.rampDownSp = 100;motorR.rampDownSp = 100;
+          //funqueue.add(
+            //function(){
+              motorL.runForDistance(motortime, motorL.maxSpeed * directionL, motorL.stopActionValues.brake);
+              motorR.runForDistance(motortime, motorR.maxSpeed * directionR, motorR.stopActionValues.brake);
+            //}
+          //);
+          res.send('Completed')
+        } else {
+          console.log("No motor could be found. Are you sure that one is connected?");
+          res.send('no motor on that port')
+        }
     }
     if (req.query.time) {
         motortime = parseInt(req.query.time)
+        if (motorL.connected && motorR.connected) {
+
+
+          console.log('Sending motor command...');
+
+          motorL.rampUpSp = 100;motorR.rampUpSp = 100;
+          motorL.rampDownSp = 100;motorR.rampDownSp = 100;
+          //funqueue.add(
+            //function(){
+              motorL.runForTime(motortime, motorL.maxSpeed , motorL.stopActionValues.brake);
+              motorR.runForTime(motortime, motorR.maxSpeed , motorR.stopActionValues.brake);
+            //}
+          //);
+          res.send('Completed')
+        } else {
+          console.log("No motor could be found. Are you sure that one is connected?");
+          res.send('no motor on that port')
+        }
     }
 
-    if (motorL.connected && motorR.connected) {
 
-
-      console.log('Sending motor command...');
-
-      motorL.rampUpSp = 100;motorR.rampUpSp = 100;
-      motorL.rampDownSp = 100;motorR.rampDownSp = 100;
-      //funqueue.add(
-        //function(){
-          motorL.runForTime(motortime, motorL.maxSpeed , motorL.stopActionValues.brake);
-          motorR.runForTime(motortime, motorR.maxSpeed , motorR.stopActionValues.brake);
-        //}
-      //);
-      res.send('Completed')
-    } else {
-      console.log("No motor could be found. Are you sure that one is connected?");
-      res.send('no motor on that port')
-    }
   } else {
     res.send('no port supplied')
   }
