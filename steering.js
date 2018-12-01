@@ -40,8 +40,10 @@ var commandString  = "/drive?"
 
 Steering.prototype.allStop = function() {
 
-var commandString  = "/stop"
-                    
+var commandString  = "/stop?"
++"portL="+this.leftPort
++"&portR="+this.rightPort
+
 
   var command = {ip:this.address,
                 command:commandString
