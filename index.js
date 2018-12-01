@@ -8,6 +8,7 @@
 
 
  var http = require('http');
+ var url = require('url');
 
 
 const ev3dev = require('ev3dev-lang');
