@@ -58,6 +58,8 @@ Steering.prototype.rotate = function(distance,direction) {
                       +"&speed="+this.currentSpeed
                       +"&direction="+direction
 
+                      console.log(direction);
+
     var command = {ip:this.address,
                   command:commandString
                   }

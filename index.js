@@ -128,12 +128,13 @@ app.get('/driveRotate', function(req, res) {
     var distance = 1;
     var directionL =1;
     var directionR =1;
+    console.log(req.query)
 
-    if(req.query.direction ="R"){
+    if(req.query.direction =="R"){
       directionR =1;
       directionL =-1;
     }
-    else if(req.query.direction ="L"){
+    else if(req.query.direction =="L"){
       directionR =-1;
       directionL =1;
     }
@@ -141,7 +142,7 @@ app.get('/driveRotate', function(req, res) {
 
     var motortime = 1000;
 
-    console.log(req.query)
+
     if (req.query.speed) {
       speed = 1/parseInt(speed)
     }
