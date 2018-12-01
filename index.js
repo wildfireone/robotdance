@@ -75,8 +75,8 @@ app.get('/drive', function(req, res) {
       motorL.rampDownSp = 100;motorR.rampDownSp = 100;
       //funqueue.add(
         //function(){
-          motorL.runForDistance(distance, motorL.maxSpeed * speed * directionL, motorL.stopActionValues.brake);
-          motorR.runForDistance(distance, motorR.maxSpeed * speed * directionR, motorR.stopActionValues.brake);
+          motorL.runForDistance(distance, motorL.maxSpeed , motorL.stopActionValues.brake);
+          motorR.runForDistance(distance, motorR.maxSpeed , motorR.stopActionValues.brake);
         //}
       //);
       res.send('Completed')
