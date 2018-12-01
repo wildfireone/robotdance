@@ -80,8 +80,8 @@ app.get('/drive', function(req, res) {
           //funqueue.add(
             //function(){
             console.log(directionL +":"+directionR)
-              motorL.runForDistance(distance, motorL.maxSpeed * directionL, motorL.stopActionValues.brake);
-              motorR.runForDistance(distance, motorR.maxSpeed * directionR, motorR.stopActionValues.brake);
+              motorL.runForDistance(distance * directionL, motorL.maxSpeed , motorL.stopActionValues.brake);
+              motorR.runForDistance(distance * directionR, motorR.maxSpeed , motorR.stopActionValues.brake);
             //}
           //);
           res.send('Completed')
