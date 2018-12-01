@@ -64,7 +64,7 @@ app.get('/drive', function(req, res) {
       directionR = directionR * req.query.direction;
     }
 
-    console.log(req.query)
+    //console.log(req.query)
     if (req.query.speed) {
       speed = 1/parseInt(speed)
     }
@@ -73,15 +73,15 @@ app.get('/drive', function(req, res) {
         if (motorL.connected && motorR.connected) {
 
 
-          console.log('Sending motor command...');
+          //console.log('Sending motor command...');
 
           motorL.rampUpSp = 100;motorR.rampUpSp = 100;
           motorL.rampDownSp = 100;motorR.rampDownSp = 100;
           //funqueue.add(
             //function(){
-            console.log(directionL +":"+directionR)
-              motorL.runForDistance(distance * directionL, motorL.maxSpeed , motorL.stopActionValues.coast);
-              motorR.runForDistance(distance * directionR, motorR.maxSpeed , motorR.stopActionValues.coast);
+            //console.log(directionL +":"+directionR)
+              motorL.runForDistance(distance * directionL, motorL.maxSpeed , motorL.stopActionValues.hold);
+              motorR.runForDistance(distance * directionR, motorR.maxSpeed , motorR.stopActionValues.hold);
             //}
           //);
           res.send('Completed')
@@ -128,7 +128,7 @@ app.get('/driveRotate', function(req, res) {
     var distance = 1;
     var directionL =1;
     var directionR =1;
-    console.log(req.query)
+    //console.log(req.query)
 
     if(req.query.direction =="R"){
       directionR =1;
@@ -151,14 +151,14 @@ app.get('/driveRotate', function(req, res) {
         if (motorL.connected && motorR.connected) {
 
 
-          console.log('Sending motor command...');
+          //console.log('Sending motor command...');
 
           motorL.rampUpSp = 100;motorR.rampUpSp = 100;
           motorL.rampDownSp = 100;motorR.rampDownSp = 100;
           //funqueue.add(
             //function(){
-              motorL.runForDistance(distance * directionL, motorL.maxSpeed , motorL.stopActionValues.coast);
-              motorR.runForDistance(distance * directionR, motorR.maxSpeed , motorR.stopActionValues.coast);
+              motorL.runForDistance(distance * directionL, motorL.maxSpeed , motorL.stopActionValues.break);
+              motorR.runForDistance(distance * directionR, motorR.maxSpeed , motorR.stopActionValues.break);
             //}
           //);
           res.send('Completed')

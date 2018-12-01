@@ -1,6 +1,9 @@
 var Skynet = require('./robot.js');
 
-var Robot = new Skynet('192.168.2.2');
+var Robots =[];
+Robots.push(new Skynet('192.168.2.2'));
+Robots.push(new Skynet('192.168.2.3'));
+
 
 //Robot.move(1000, 1);
 //Robot.turn(100,"L");
@@ -26,10 +29,10 @@ stdin.on( 'data', function( key ){
   }
 
   switch(key){
-    case 'w': console.log("up"); Robot.move(100,1); break;
-    case 'a': console.log("left"); Robot.turn(100,"L"); break;
-    case 's': console.log("down"); Robot.move(100,-1); break;
-    case 'd': console.log("right"); Robot.turn(100,"R"); break;
+    case 'w': console.log("up"); Robots.forEach(function(r){r.move(100,1)}); break;
+    case 'a': console.log("left"); Robots.forEach(function(r){r.turn(100,"L")}); break;
+    case 's': console.log("down"); Robots.forEach(function(r){r.move(100,-1)}); break;
+    case 'd': console.log("right"); Robots.forEach(function(r){r.turn(100,"R")}); break;
 
   }
 });
