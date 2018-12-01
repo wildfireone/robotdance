@@ -23,6 +23,9 @@ function Robot(address) {
 Robot.prototype.move = function(distance,direction) {
   this.Steering.move(distance,direction);
 };
+Robot.prototype.moveon = function(direction) {
+  this.Steering.moveon(direction);
+};
 Robot.prototype.turn = function(distance,direction) {
   this.Steering.rotate(distance,direction);
 };
@@ -43,8 +46,8 @@ Robot.prototype.run = function() {
   RightMotor.run();
 };
 Robot.prototype.stop = function() {
-  LeftMotor.stop();
-  RightMotor.stop();
+  this.Steering.allStop();
+  //RightMotor.stop();
 };
 
 

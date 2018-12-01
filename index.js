@@ -167,6 +167,17 @@ app.get('/driveon', function(req, res) {
   }
 });
 
+app.get('/stop',function(req,res){
+
+  if (req.query.portL && getPort(req.query.portL) && req.query.portR && getPort(req.query.portR)) {
+    var motorL = new ev3dev.Motor(getPort(req.query.portL));
+    var motorR = new ev3dev.Motor(getPort(req.query.portR));
+    motorR.stop();
+    motorL.stop();
+  }
+
+});
+
 app.get('/driveRotate', function(req, res) {
 
 
@@ -206,8 +217,8 @@ app.get('/driveRotate', function(req, res) {
           motorL.rampDownSp = 100;motorR.rampDownSp = 100;
           //funqueue.add(
             //function(){
-              motorL.runForDistance(distance * directionL, motorL.maxSpeed , motorL.stopActionValues.break);
-              motorR.runForDistance(distance * directionR, motorR.maxSpeed , motorR.stopActionValues.break);
+              motorL.runForever(motorL.maxSpeed * directionL , motorL.stopActionValues.break);
+              motorR.runForever(motorR.maxSpeed * directionR , motorR.stopActionValues.break);
             //}
           //);
           res.send('Completed')

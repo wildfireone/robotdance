@@ -38,9 +38,21 @@ var commandString  = "/drive?"
   this.sender(command);
 };
 
+Steering.prototype.allStop = function() {
+
+var commandString  = "/stop"
+                    
+
+  var command = {ip:this.address,
+                command:commandString
+                }
+  this.sender(command);
+};
+
+
 Steering.prototype.moveon = function(direction) {
 
-var commandString  = "/drive?"
+var commandString  = "/driveon?"
                     +"portL="+this.leftPort
                     +"&portR="+this.rightPort
                     +"&speed="+this.currentSpeed
