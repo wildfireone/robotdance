@@ -57,6 +57,7 @@ app.get('/drive', function(req, res) {
     var distance = 1;
     var directionL =1;
     var directionR =1;
+    var motortime = 1000;
 
     console.log(req.query)
     if (req.query.speed) {
@@ -64,6 +65,9 @@ app.get('/drive', function(req, res) {
     }
     if (req.query.distance) {
         distance= parseInt(req.query.distance);
+    }
+    if (req.query.time) {
+        motortime = parseInt(req.query.time)
     }
 
     if (motorL.connected && motorR.connected) {
@@ -75,8 +79,8 @@ app.get('/drive', function(req, res) {
       motorL.rampDownSp = 100;motorR.rampDownSp = 100;
       //funqueue.add(
         //function(){
-          motorL.runForDistance(distance, motorL.maxSpeed , motorL.stopActionValues.brake);
-          motorR.runForDistance(distance, motorR.maxSpeed , motorR.stopActionValues.brake);
+          motorL.runForTime(motortime, motorL.maxSpeed , motorL.stopActionValues.brake);
+          motorR.runForTime(motortime, motorR.maxSpeed , motorR.stopActionValues.brake);
         //}
       //);
       res.send('Completed')
