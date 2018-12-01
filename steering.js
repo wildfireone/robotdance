@@ -22,6 +22,21 @@ var commandString  = "/drive?"
                 }
   this.sender(command);
 };
+// class methods
+Steering.prototype.move = function(distance,direction) {
+
+var commandString  = "/drive?"
+                    +"portL="+this.leftPort
+                    +"&portR="+this.rightPort
+                    +"&distance="+distance
+                    +"&speed="+this.currentSpeed
+                    +"&direction="+direction
+
+  var command = {ip:this.address,
+                command:commandString
+                }
+  this.sender(command);
+};
 Steering.prototype.moveFor = function(time) {
   var commandString  = "/driveTime?"
                       +"portL="+this.leftPort
@@ -35,12 +50,13 @@ Steering.prototype.moveFor = function(time) {
     this.sender(command);
 
 };
-Steering.prototype.rotate = function(distance) {
+Steering.prototype.rotate = function(direction) {
   var commandString  = "/driveRotate?"
                       +"portL="+this.leftPort
                       +"&portR="+this.rightPort
                       +"&distance="+distance
                       +"&speed="+this.currentSpeed
+                      +"&direction="+direction
 
     var command = {ip:this.address,
                   command:commandString

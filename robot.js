@@ -10,7 +10,7 @@ function Robot(address) {
   // always initialize all instance properties
   this.ip= address
   this.portleft = "C"
-  this.portright ="D"
+  this.portright ="B"
   this.portmini = "A"
   this.sensors = {};
   this.LeftMotor = new Motor(Sender,address,this.portleft,"big");

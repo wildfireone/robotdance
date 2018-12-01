@@ -59,6 +59,11 @@ app.get('/drive', function(req, res) {
     var directionR =1;
     var motortime = 1000;
 
+    if (req.query.direction){
+      directionL = directionL * req.query.direction;
+      directionR = directionR * req.query.direction;
+    }
+
     console.log(req.query)
     if (req.query.speed) {
       speed = 1/parseInt(speed)
@@ -74,8 +79,84 @@ app.get('/drive', function(req, res) {
           motorL.rampDownSp = 100;motorR.rampDownSp = 100;
           //funqueue.add(
             //function(){
-              motorL.runForDistance(motortime, motorL.maxSpeed * directionL, motorL.stopActionValues.brake);
-              motorR.runForDistance(motortime, motorR.maxSpeed * directionR, motorR.stopActionValues.brake);
+              motorL.runForDistance(distance, motorL.maxSpeed * directionL, motorL.stopActionValues.brake);
+              motorR.runForDistance(distance, motorR.maxSpeed * directionR, motorR.stopActionValues.brake);
+            //}
+          //);
+          res.send('Completed')
+        } else {
+          console.log("No motor could be found. Are you sure that one is connected?");
+          res.send('no motor on that port')
+        }
+    }
+    if (req.query.time) {
+        motortime = parseInt(req.query.time)
+        if (motorL.connected && motorR.connected) {
+
+
+          console.log('Sending motor command...');
+
+          motorL.rampUpSp = 100;motorR.rampUpSp = 100;
+          motorL.rampDownSp = 100;motorR.rampDownSp = 100;
+          //funqueue.add(
+            //function(){
+              motorL.runForTime(motortime, motorL.maxSpeed , motorL.stopActionValues.brake);
+              motorR.runForTime(motortime, motorR.maxSpeed , motorR.stopActionValues.brake);
+            //}
+          //);
+          res.send('Completed')
+        } else {
+          console.log("No motor could be found. Are you sure that one is connected?");
+          res.send('no motor on that port')
+        }
+    }
+
+
+  } else {
+    res.send('no port supplied')
+  }
+});
+
+app.get('/driveRotate', function(req, res) {
+
+
+  if (req.query.portL && getPort(req.query.portL) && req.query.portR && getPort(req.query.portR)) {
+    var motorL = new ev3dev.Motor(getPort(req.query.portL));
+    var motorR = new ev3dev.Motor(getPort(req.query.portR));
+    var speed  = 0.5;
+    var distance = 1;
+    var directionL =1;
+    var directionR =1;
+
+    if(req.query.direction ="R"){
+      directionR =1;
+      directionL =-1;
+    }
+    else if(req.query.direction ="L"){
+      directionR =-1;
+      directionL =1;
+    }
+
+
+    var motortime = 1000;
+
+    console.log(req.query)
+    if (req.query.speed) {
+      speed = 1/parseInt(speed)
+    }
+    if (req.query.distance) {
+        distance= parseInt(req.query.distance);
+        if (motorL.connected && motorR.connected) {
+
+
+          console.log('Sending motor command...');
+
+          motorL.rampUpSp = 100;motorR.rampUpSp = 100;
+          motorL.rampDownSp = 100;motorR.rampDownSp = 100;
+          //funqueue.add(
+            //function(){
+              motorL.runForDistance(distance, motorL.maxSpeed * directionL, motorL.stopActionValues.brake);
+              motorR.runForDistance(distance, motorR.maxSpeed * directionR, motorR.stopActionValues.brake);
             //}
           //);
           res.send('Completed')
